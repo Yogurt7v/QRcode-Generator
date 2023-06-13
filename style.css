@@ -5,7 +5,7 @@
 }
 
 body {
-  background-color: rgb(11, 1, 36);
+  background: rgb(11, 1, 36);
   font-family: sans-serif;
   max-width: 500px;
   height: 100vh;
@@ -61,10 +61,10 @@ a {
   border: 1px solid #414866;
 }
 
-img {
-  width: 20px;
-  height: 20px;
-  margin-left: 10px;
+#qr-code img,
+#qr-code canvas {
+  max-width: 100% !important;
+  min-height: 100% !important;
 }
 
 .row {
@@ -99,6 +99,11 @@ img {
   flex: 1;
 }
 
+.btn img {
+  width: 20px;
+  margin-left: 10px;
+}
+
 .share-btn {
   margin-left: 0.7rem;
 }
@@ -118,9 +123,10 @@ img {
     width: 95vw;
     height: 95vw;
   }
-  img {
-    max-width: 95vm;
-    max-height: 95vm;
+  #qr-code img,
+  #qr-code canvas {
+    max-width: 95vm !important;
+    max-height: 95vm !important;
   }
   .btn {
     min-width: unset;

@@ -12,13 +12,12 @@ qrText.addEventListener("input", handleQRText);
 sizes.addEventListener("input", handleSize);
 shareBtn.addEventListener("input", handleShare);
 
-const defautlUrl = "https://";
-let colorLight = "#fff";
-colorDark = "#000";
-text = defautlUrl;
-size = 300; /*size => sizes*/
+const defautlUrl = "https://ya.ru/";
+let colorLight = "#fff",
+  colorDark = "#000",
+  text = defautlUrl,
+  size = 300;
 
-/* какая то хрень*/
 function handleDarkColor(e) {
   colorDark = e.target.value;
   generateQRCode();
@@ -43,7 +42,7 @@ async function generateQRCode() {
   new QRCode("qr-code", {
     text,
     height: size,
-    width: sizes,
+    width: size,
     colorLight,
     colorDark,
   });
@@ -58,6 +57,10 @@ async function handleShare() {
       const file = new File([blob], "QRCode.png", {
         type: blob.type,
       });
+      await navigator.share({
+        files: [file],
+        title: text,
+      });
     } catch (error) {
       alert("Something wrond");
     }
@@ -68,18 +71,19 @@ function handleSize(e) {
   size = e.target.value;
   generateQRCode();
 }
-/*
-function resolveDataUrl(){
-  return new Promise ((resolve, reject)={
-    setTimeout(()=>{
+
+function resolveDataUrl() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
       const img = document.querySelector("#qr-code img");
-      if(img.currentSrc){
+      if (img.currentSrc) {
         resolve(img.currentSrc);
         return;
       }
-    })
-  } )
+      const canvas = document.querySelector("canvas");
+      resolve(canvas.toDataURL());
+    }, 50);
+  });
 }
-*/
 
 generateQRCode();
